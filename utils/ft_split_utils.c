@@ -3,71 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derjavec <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: derjavec <derjavec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:51:33 by derjavec          #+#    #+#             */
-/*   Updated: 2024/01/19 10:51:36 by derjavec         ###   ########.fr       */
+/*   Updated: 2024/05/17 09:12:01 by derjavec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include"../pipex.h"
 
-char	*ft_copylettres_reduc(char **tableau, int mot, int lettres, char *s)
+#include"../pipex.h"
+static char	*ft_copyletters_utils(char **tab, int word, int letters, char *s)
 {
 	int	i;
 
-	tableau[mot] = malloc((lettres + 1) * sizeof(char));
-	if (tableau[mot] == NULL)
+	tab[word] = malloc((letters + 1) * sizeof(char));
+	if (tab[word] == NULL)
 	{
 		i = 0;
-		while (tableau[i])
-			free(tableau[i++]);
-		return (free (tableau), NULL);
+		while (tab[i])
+			free(tab[i++]);
+		return (free (tab), NULL);
 	}
 	i = 0;
-	while (s[i] && i < lettres)
-	{	
-		tableau[mot][i] = s[i];
+	while (s[i] && i < letters)
+	{
+		tab[word][i] = s[i];
 		i++;
 	}
-	tableau[mot][i] = '\0';
-	return (tableau[mot]);
+	tab[word][i] = '\0';
+	return (tab[word]);
 }
 
-int	no_quotes(int quotes, int lettres, char **ce, char *s)
+static int	no_quotes(int quotes, int letters, char **ce, char *s)
 {
 	if (quotes == 0)
 	{
-		while (s[lettres] && s[lettres] != ce[0][0])
-			lettres++;
+		while (s[letters] && s[letters] != ce[0][0])
+			letters++;
 	}
-	return (lettres);
+	return (letters);
 }
 
-char	*ft_copylettres(char **tableau, int mot, char *s, char **ce)
+char	*ft_copyletters(char **tab, int word, char *s, char **ce)
 {
-	int	lettres;
+	int	letters;
 	int	quotes;
 	int	i;
 
-	lettres = 0;
+	letters = 0;
 	quotes = 0;
 	i = 0;
 	while (ce[1][i])
 	{
-		if (s[lettres] == ce[1][i++])
+		if (s[letters] == ce[1][i++])
 		{
 			quotes = !quotes;
-			lettres++;
+			letters++;
+			break ;
 		}
 	}
-	lettres = no_quotes(quotes, lettres, ce, s);
+	letters = no_quotes(quotes, letters, ce, s);
 	if (quotes == 1)
 	{
-		while (s[lettres] && s[lettres] != ce[1][i])
-			lettres++;
-		lettres = lettres - 2;
+		while (s[letters] && s[letters] != ce[1][i - 1])
+		{
+			letters++;
+		}
+		if (s[letters] == ce[1][i - 1])
+			letters = letters - 1;
 		s = s + 1;
 	}
-	tableau[mot] = ft_copylettres_reduc(tableau, mot, lettres, s);
-	return (tableau[mot]);
+	tab[word] = ft_copyletters_utils(tab, word, letters, s);
+	return (tab[word]);
 }
+

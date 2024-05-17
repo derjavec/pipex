@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derjavec <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: derjavec <derjavec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 08:56:59 by derjavec          #+#    #+#             */
-/*   Updated: 2024/01/16 08:57:01 by derjavec         ###   ########.fr       */
+/*   Updated: 2024/05/17 09:11:15 by derjavec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ typedef struct s_bonus
 
 int		ft_strncmp(const char *first, const char *second, size_t length);
 char	**ft_split(char *s, char c, char *e);
-char	*ft_copylettres_reduc(char **tableau, int mot, int lettres, char *s);
-char	*ft_copylettres(char **tableau, int mot, char *s, char **ce);
+char	*ft_copyletters(char **tab, int word, char *s, char **ce);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup( const char *src);
